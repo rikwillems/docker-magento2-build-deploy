@@ -1,4 +1,4 @@
-# Build & deploy Magento 2 with Deployer
+# Build & deploy Magento 2 with Deployer and Docker
 
 ## License
 [Open Software License v. 3.0 (OSL-3.0)](https://opensource.org/licenses/OSL-3.0)
