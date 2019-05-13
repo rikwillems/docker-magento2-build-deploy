@@ -1,7 +1,7 @@
 FROM ubuntu:18.04
 
 # Fix debconf warnings upon build
-ARG DEBIAN_FRONTEND=noninteractive
+RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
 
 RUN apt-get update
 
