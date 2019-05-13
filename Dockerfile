@@ -3,7 +3,6 @@ FROM ubuntu:18.04
 # Fix debconf warnings upon build
 ARG DEBIAN_FRONTEND=noninteractive
 
-# Install selected extensions and other stuff
 RUN apt-get update
 
 RUN apt -y install \
@@ -14,7 +13,7 @@ RUN apt -y install \
  software-properties-common \
  unzip
 
-# Remove existing php installation
+# Remove existing php installation(s)
 RUN apt-get -y purge php7.*
 
 RUN add-apt-repository -y ppa:ondrej/php
@@ -33,10 +32,9 @@ RUN apt-get -y --no-install-recommends install \
  php7.1-xsl \
  php7.1-zip
 
+# Cleanup
 RUN apt-get autoremove
-
 RUN apt-get clean
-
 RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
