@@ -27,9 +27,11 @@ RUN apt-get -y --no-install-recommends install \
  php7.1-intl \
  php7.1-mbstring \
  php7.1-mcrypt \
+ php7.1-mysql \
  php7.1-soap \
  php7.1-xml \
- php7.1-xsl
+ php7.1-xsl \
+ php7.1-zip
 
 RUN apt-get autoremove
 
