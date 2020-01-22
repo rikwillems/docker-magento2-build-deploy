@@ -10,7 +10,7 @@ ADD https://dl.bintray.com/php-alpine/key/php-alpine.rsa.pub /etc/apk/keys/php-a
 RUN apk --update add ca-certificates
 
 # Install packages
-RUN apk --update --no-cache add \
+RUN apk --no-cache add \
     curl \
     git \
     openssh-client \
@@ -20,8 +20,9 @@ RUN apk --update --no-cache add \
 # Install php
 RUN apk --no-cache add \
     php7 \
+    php7-bcmath \
     php7-cli \
-    php-curl \
+    php7-curl \
     php7-gd \
     php7-intl \
     php7-json \
