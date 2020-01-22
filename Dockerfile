@@ -11,7 +11,6 @@ RUN apk --update add ca-certificates
 
 # Install packages
 RUN apk --no-cache add \
-    curl \
     openssh-client \
     rsync \
     unzip
@@ -42,9 +41,9 @@ RUN apk --no-cache add \
     php7-zip
 
 # Install tools
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+RUN wget https://getcomposer.org/installer && php installer --install-dir=/usr/local/bin --filename=composer
 RUN composer global require hirak/prestissimo
-RUN curl -LO https://deployer.org/deployer.phar && mv deployer.phar /usr/local/bin/dep && chmod +x /usr/local/bin/dep
+RUN wget https://deployer.org/deployer.phar && mv deployer.phar /usr/local/bin/dep && chmod +x /usr/local/bin/dep
 
 # Cleanup
 RUN rm -rf /root/.composer/cache
