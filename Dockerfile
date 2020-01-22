@@ -1,43 +1,28 @@
-FROM ubuntu:18.04
 
-# Fix debconf warnings upon build
-RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
+FROM alpine:3.9
 
-RUN apt-get update
+LABEL Description="Build & deploy Magento 2 with Deployer and Docker"
 
-RUN apt -y install \
- curl \
- git \
- openssh-client \
- rsync \
- software-properties-common \
- unzip
+# trust this project public key to trust the packages.
+ADD https://dl.bintray.com/php-alpine/key/php-alpine.rsa.pub /etc/apk/keys/php-alpine.rsa.pub
 
-# Remove existing php installation(s)
-RUN apt-get -y purge php7.*
+# make sure you can use HTTPS
+RUN apk --update add ca-certificates
 
-RUN add-apt-repository -y ppa:ondrej/php
+# add the repository, make sure you replace the correct versions if you want.
+RUN echo "https://dl.bintray.com/php-alpine/v3.9/php-7.3" >> /etc/apk/repositories
 
-RUN apt-get -y --no-install-recommends install \
- php7.3-cli \
- php7.3-bcmath \
- php7.3-curl \
- php7.3-gd \
- php7.3-intl \
- php7.3-mbstring \
- php7.3-mysql \
- php7.3-soap \
- php7.3-xml \
- php7.3-xsl \
- php7.3-zip
-
-# Cleanup
-RUN apt-get autoremove
-RUN apt-get clean
-RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
-
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-
-RUN composer global require hirak/prestissimo
-
-RUN curl -LO https://deployer.org/deployer.phar && mv deployer.phar /usr/local/bin/dep && chmod +x /usr/local/bin/dep
+# Install packages
+RUN apk --no-cache add \
+  php7 \
+  php7-mysqli \
+  php7-cli \
+   php7-bcmath \
+   php7-curl \
+   php7-gd \
+   php7-intl \
+   php7-mbstring \
+   php7-soap \
+   php7-xml \
+   php7-xsl \
+   php7-zip
