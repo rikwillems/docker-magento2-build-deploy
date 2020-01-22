@@ -32,10 +32,13 @@ RUN apk --no-cache add \
     php7-mbstring \
     php7-mysqlnd \
     php7-openssl \
+    php7-pdo_mysql \
     php7-phar \
+    php7-simplexml \
     php7-soap \
     php7-tokenizer \
     php7-xml \
+    php7-xmlwriter \
     php7-xsl \
     php7-zip
 
