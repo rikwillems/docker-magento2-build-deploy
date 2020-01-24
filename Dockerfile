@@ -28,6 +28,7 @@ RUN apk --no-cache --update add  \
     php7-pdo_mysql \
     php7-phar \
     php7-simplexml \
+    php7-session \
     php7-soap \
     php7-tokenizer \
     php7-xml \
