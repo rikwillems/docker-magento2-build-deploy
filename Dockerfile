@@ -7,16 +7,11 @@ LABEL Description="Build & deploy Magento 2 with Deployer and Docker"
 ADD https://dl.bintray.com/php-alpine/key/php-alpine.rsa.pub /etc/apk/keys/php-alpine.rsa.pub
 
 # make sure you can use HTTPS
-RUN apk --update add ca-certificates
-
-# Install packages
-RUN apk --no-cache add \
+RUN apk --no-cache --update add  \
+    ca-certificates \
     openssh-client \
     rsync \
-    unzip
-
-# Install php
-RUN apk --no-cache add \
+    unzip \
     php7 \
     php7-bcmath \
     php7-cli \
@@ -38,7 +33,8 @@ RUN apk --no-cache add \
     php7-xml \
     php7-xmlwriter \
     php7-xsl \
-    php7-zip
+    php7-zip \
+    && sed -i "s|;*memory_limit =.*|memory_limit = 512M|i" /etc/php7/php.ini
 
 # Install tools
 RUN wget https://getcomposer.org/installer && php installer --install-dir=/usr/local/bin --filename=composer
