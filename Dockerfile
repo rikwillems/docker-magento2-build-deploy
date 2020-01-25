@@ -12,6 +12,7 @@ RUN apk --no-cache --update add  \
     openssh-client \
     rsync \
     unzip \
+    npm \
     php7 \
     php7-bcmath \
     php7-cli \
@@ -38,6 +39,7 @@ RUN apk --no-cache --update add  \
     && sed -i "s|;*memory_limit =.*|memory_limit = 512M|i" /etc/php7/php.ini
 
 # Install tools
+RUN npm install --global requirejs terser
 RUN wget https://getcomposer.org/installer && php installer --install-dir=/usr/local/bin --filename=composer
 RUN composer global require hirak/prestissimo
 RUN wget https://deployer.org/deployer.phar && mv deployer.phar /usr/local/bin/dep && chmod +x /usr/local/bin/dep
