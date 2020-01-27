@@ -9,10 +9,12 @@ ADD https://dl.bintray.com/php-alpine/key/php-alpine.rsa.pub /etc/apk/keys/php-a
 # make sure you can use HTTPS
 RUN apk --no-cache --update add  \
     ca-certificates \
+    git \
     openssh-client \
+    npm \
+    patch \
     rsync \
     unzip \
-    npm \
     php7 \
     php7-bcmath \
     php7-cli \
